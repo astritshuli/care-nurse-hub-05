@@ -1,11 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Languages } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Navbar = () => {
   const navigate = useNavigate();
   const [theme, setTheme] = useState("light");
+  const { i18n, t } = useTranslation();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
@@ -18,6 +20,11 @@ export const Navbar = () => {
     setTheme(newTheme);
     localStorage.setItem("theme", newTheme);
     document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "de" : "en";
+    i18n.changeLanguage(newLang);
   };
 
   const handleLogout = () => {
@@ -34,6 +41,14 @@ export const Navbar = () => {
           <Button
             variant="ghost"
             size="icon"
+            onClick={toggleLanguage}
+            className="text-nurse-600 hover:text-nurse-700 dark:text-nurse-300 dark:hover:text-nurse-200"
+          >
+            <Languages className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={toggleTheme}
             className="text-nurse-600 hover:text-nurse-700 dark:text-nurse-300 dark:hover:text-nurse-200"
           >
@@ -44,7 +59,7 @@ export const Navbar = () => {
             onClick={handleLogout}
             className="text-nurse-600 hover:text-nurse-700 hover:bg-nurse-100 dark:text-nurse-300 dark:hover:text-nurse-200 dark:hover:bg-nurse-800"
           >
-            Logout
+            {t('logout')}
           </Button>
         </div>
       </div>

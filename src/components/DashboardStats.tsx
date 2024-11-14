@@ -1,31 +1,34 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Activity, Calendar, Users, Bell } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export const DashboardStats = () => {
+  const { t } = useTranslation();
+
   const stats = [
     {
-      title: "Active Patients",
+      title: t('activePatients'),
       value: "24",
       icon: Users,
-      trend: "+2 from yesterday",
+      trend: t('fromYesterday'),
     },
     {
-      title: "Hours This Week",
+      title: t('hoursThisWeek'),
       value: "32.5",
       icon: Activity,
-      trend: "8 hours remaining",
+      trend: t('hoursRemaining'),
     },
     {
-      title: "Upcoming Shifts",
+      title: t('upcomingShifts'),
       value: "3",
       icon: Calendar,
-      trend: "Next: Tomorrow 7AM",
+      trend: t('nextShift'),
     },
     {
-      title: "New Notifications",
+      title: t('newNotifications'),
       value: "5",
       icon: Bell,
-      trend: "2 urgent",
+      trend: t('urgent'),
     },
   ];
 
